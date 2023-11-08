@@ -1,0 +1,8 @@
+# Node pinned as per original project
+FROM node:18.7
+ENV APP_DIR=/app
+WORKDIR ${APP_DIR}
+ONBUILD COPY package.json package-lock.json .
+ONBUILD RUN npm ci
+ONBUILD COPY . .
+ONBUILD RUN ./scripts/build.sh

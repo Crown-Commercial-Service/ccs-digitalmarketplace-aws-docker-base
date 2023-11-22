@@ -1,0 +1,25 @@
+name: "Run our tests"
+
+on:
+  pull_request:
+
+jobs:
+  docker:
+    runs-on: ubuntu-latest
+
+    env:
+      BASE_HTTP_BUILDSTATIC_IMAGE_NAME: dmp-http-static
+      BASE_HTTP_FRONTEND_IMAGE_NAME: dmp-http-frontend
+      BASE_HTTP_HEADLESS_IMAGE_NAME: dmp-http-headless
+      BASE_WSGI_IMAGE_NAME: dmp-wsgi
+      BASE_WSGI_ANTIVIRUS_IMAGE_NAME: dmp-wsgi-ativirus
+      BUILD_VERSION: test
+
+    steps:
+      -
+        name: Checkout code
+        uses: actions/checkout@v4
+
+      -
+        name: Build images
+        run: make build

@@ -16,6 +16,8 @@ RUN /usr/sbin/groupadd -r uwsgi && \
     /app/venv/bin/pip3 install --no-cache-dir --upgrade pip && \
     /app/venv/bin/pip3 install --no-cache-dir pyuwsgi==${DEP_PYUWSGI_VERSION}
 
+COPY mime.types /etc/mime.types
+
 CMD ["/app/venv/bin/uwsgi", "--http-socket", ":8888", "--master", "-w", "application:application"]
 EXPOSE 8888
 

@@ -1,5 +1,5 @@
 # Node pinned as per original project
-FROM node:18.7
+FROM node:18.7-alpine
 ENV APP_DIR=/app
 WORKDIR ${APP_DIR}
 ONBUILD COPY package.json package-lock.json .

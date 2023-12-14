@@ -2,6 +2,7 @@
 FROM node:18.7-alpine
 ENV APP_DIR=/app
 WORKDIR ${APP_DIR}
+ONBUILD RUN apk --no-cache upgrade
 ONBUILD COPY package.json package-lock.json .
 ONBUILD RUN npm ci
 ONBUILD COPY . .

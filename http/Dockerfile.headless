@@ -12,6 +12,5 @@ COPY app-headless.conf /etc/nginx/sites-enabled/app.conf
 
 EXPOSE 8080
 
-ONBUILD RUN apk --no-cache upgrade
 ONBUILD ARG DM_APP_NAME
 ONBUILD RUN sed -i "s/{DM_APP_NAME}/${DM_APP_NAME}/g" /etc/nginx/nginx.conf

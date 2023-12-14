@@ -10,9 +10,10 @@ LABEL BUILD_DATE=${BUILD_DATE}
 LABEL BUILD_VERSION=${BUILD_VERSION}
 
 WORKDIR ${APP_DIR}
-RUN addgroup -r uwsgi && adduser --no-log-init -r -g uwsgi && \
-    apk add --no-cache python3 -m venv && \
-    pip3 install --no-cache-dir --upgrade pip pyuwsgi==${DEP_PYUWSGI_VERSION}
+RUN addgroup -S uwsgi && adduser -S -H -G uwsgi uwsgi && \
+    python3 -m venv /app/venv && \
+    /app/venv/bin/pip3 install --no-cache-dir --upgrade pip && \
+    /app/venv/bin/pip3 install --no-cache-dir pyuwsgi==${DEP_PYUWSGI_VERSION}
 
 CMD ["/app/venv/bin/uwsgi", "--http-socket", ":8888", "--master", "-w", "application:application"]
 EXPOSE 8888

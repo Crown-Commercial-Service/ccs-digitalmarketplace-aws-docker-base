@@ -10,9 +10,10 @@ LABEL BUILD_DATE=${BUILD_DATE}
 LABEL BUILD_VERSION=${BUILD_VERSION}
 
 WORKDIR ${APP_DIR}
-RUN addgroup -r uwsgi && adduser --no-log-init -r -g uwsgi && \
-    apk add --no-cache python3 -m venv && \
-    pip3 install --no-cache-dir --upgrade pip pyuwsgi==${DEP_PYUWSGI_VERSION}
+RUN addgroup -S uwsgi && adduser -S -H -G uwsgi uwsgi && \
+    python3 -m venv /app/venv && \
+    /app/venv/bin/pip3 install --no-cache-dir --upgrade pip && \
+    /app/venv/bin/pip3 install --no-cache-dir pyuwsgi==${DEP_PYUWSGI_VERSION}
 
 COPY mime.types /etc/mime.types
 
@@ -22,8 +23,8 @@ EXPOSE 8888
 ONBUILD ARG release_name
 ONBUILD COPY requirements.txt ${APP_DIR}
 ONBUILD RUN echo ${release_name} > ${APP_DIR}/version_label && \
-            apk add update && \
-            apk add install -y curl gcc git libffi-dev && \
+            apk upgrade && \
+            apk add curl gcc git libffi-dev && rm -rf /var/cache/apk \
             pip3 install --no-cache-dir --upgrade pip -r requirements.txt
 ONBUILD COPY --chown=uwsgi:uwsgi . ${APP_DIR}
 ONBUILD USER uwsgi

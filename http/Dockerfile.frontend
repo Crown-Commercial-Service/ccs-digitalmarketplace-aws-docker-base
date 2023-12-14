@@ -1,4 +1,4 @@
-FROM nginxinc/nginx-unprivileged
+FROM nginxinc/nginx-unprivileged:alpine
 
 ENV APP_DIR=/app
 

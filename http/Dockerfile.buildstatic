@@ -8,5 +8,4 @@ RUN apk --no-cache upgrade
 ONBUILD RUN apk --no-cache upgrade
 ONBUILD COPY package.json package-lock.json ./
 ONBUILD RUN npm ci
-ONBUILD COPY . .
 ONBUILD RUN ./scripts/build.sh

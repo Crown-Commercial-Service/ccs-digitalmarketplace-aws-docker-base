@@ -6,6 +6,3 @@ WORKDIR ${APP_DIR}
 RUN apk --no-cache upgrade
 # Also upgrade them whenever a consuming is built
 ONBUILD RUN apk --no-cache upgrade
-ONBUILD COPY package.json package-lock.json ./
-ONBUILD RUN npm ci
-

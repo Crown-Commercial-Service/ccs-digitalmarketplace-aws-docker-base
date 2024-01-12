@@ -22,6 +22,6 @@ ONBUILD COPY requirements.txt ${APP_DIR}
 ONBUILD RUN echo ${release_name} > ${APP_DIR}/version_label && \
             apk upgrade && apk add build-base curl git libffi libffi-dev && rm -rf /var/cache/apk && \
             /app/venv/bin/pip3 install --no-cache-dir --upgrade pip -r requirements.txt && \
-            apk del build-base libffi-dev && rm -rf /root/.cache
+            apk del build-base libffi-dev openssl-dev && rm -rf /root/.cache
 ONBUILD COPY --chown=uwsgi:uwsgi . ${APP_DIR}
 ONBUILD USER uwsgi

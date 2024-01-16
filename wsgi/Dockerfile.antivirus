@@ -1,8 +1,9 @@
 # Python pinned as per original project
-FROM python:3.9-slim-buster
+FROM python:3.9-alpine
 
 ENV APP_DIR=/app
 ENV DEP_PYUWSGI_VERSION=2.0.22
+ENV CRYPTOGRAPHY_DONT_BUILD_RUST=1
 
 ARG BUILD_DATE
 ARG BUILD_VERSION
@@ -10,11 +11,9 @@ LABEL BUILD_DATE=${BUILD_DATE}
 LABEL BUILD_VERSION=${BUILD_VERSION}
 
 WORKDIR ${APP_DIR}
-RUN /usr/sbin/groupadd -r uwsgi && \
-    /usr/sbin/useradd --no-log-init -r -g uwsgi uwsgi && \
-    /usr/local/bin/python3 -m venv venv && \
-    /app/venv/bin/pip3 install --no-cache-dir --upgrade pip && \
-    /app/venv/bin/pip3 install --no-cache-dir pyuwsgi==${DEP_PYUWSGI_VERSION}
+RUN addgroup -S uwsgi && adduser -S -H -G uwsgi uwsgi && \
+    python3 -m venv /app/venv && \
+    /app/venv/bin/pip3 install --no-cache-dir --upgrade pip pyuwsgi==${DEP_PYUWSGI_VERSION}
 
 CMD ["/app/venv/bin/uwsgi", "--http-socket", ":8888", "--master", "-w", "application:application"]
 EXPOSE 8888
@@ -22,9 +21,10 @@ EXPOSE 8888
 ONBUILD ARG release_name
 ONBUILD COPY requirements.txt ${APP_DIR}
 ONBUILD RUN echo ${release_name} > ${APP_DIR}/version_label && \
-            apt-get update && \
-            apt-get install -y curl gcc git libffi-dev && \
-            /app/venv/bin/pip3 install --no-cache-dir --upgrade pip && \
-            /app/venv/bin/pip3 install --no-cache-dir -r requirements.txt
+            apk upgrade && apk add binutils build-base curl git libffi libffi-dev openssl openssl-dev && rm -rf /var/cache/apk && \
+            /app/venv/bin/pip3 install --no-cache-dir --upgrade pip -r requirements.txt && \
+            apk del build-base libffi-dev openssl-dev && rm -rf /root/.cache
+# Needed to fix an issue specific to Alpine
+ONBUILD RUN ln -s /usr/lib/libcrypto.so.3 /usr/lib/libcrypto.so
 ONBUILD COPY --chown=uwsgi:uwsgi . ${APP_DIR}
 ONBUILD USER uwsgi

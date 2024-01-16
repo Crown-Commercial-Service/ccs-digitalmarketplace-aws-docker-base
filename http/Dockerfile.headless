@@ -1,4 +1,4 @@
-FROM nginxinc/nginx-unprivileged
+FROM nginxinc/nginx-unprivileged:alpine
 
 ARG BUILD_DATE
 ARG BUILD_VERSION

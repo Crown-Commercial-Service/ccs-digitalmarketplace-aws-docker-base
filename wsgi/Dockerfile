@@ -16,7 +16,7 @@ RUN addgroup -S uwsgi && adduser -S -H -G uwsgi uwsgi && \
 
 COPY mime.types /etc/mime.types
 
-CMD ["/app/venv/bin/uwsgi", "--http-socket", ":8888", "--processes", "4", "--enable-threads", "--buffer-size", "16384", "--single-interpreter", "--reload-on-rss", "256", "disable-logging", "harakiri", "60", "--master", "-w", "application:application"]
+CMD ["/app/venv/bin/uwsgi", "--http-socket", ":8888", "--processes", "4", "--enable-threads", "--buffer-size", "16384", "--single-interpreter", "--reload-on-rss", "256", "--disable-logging", "--harakiri", "60", "--master", "-w", "application:application"]
 EXPOSE 8888
 
 ONBUILD ARG release_name

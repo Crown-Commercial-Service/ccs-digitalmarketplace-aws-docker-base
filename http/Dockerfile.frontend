@@ -9,8 +9,8 @@ LABEL BUILD_VERSION=${BUILD_VERSION}
 
 COPY nginx.conf /etc/nginx/nginx.conf
 RUN rm -f /etc/nginx/conf.d/*.conf
-COPY sites-enabled.conf /etc/nginx/conf.d/sites-enabled.conf
-COPY app-frontend.conf /etc/nginx/sites-enabled/app.conf
+COPY --chown=nginx:nginx sites-enabled.conf /etc/nginx/conf.d/sites-enabled.conf
+COPY --chown=nginx:nginx app-frontend.conf /etc/nginx/sites-enabled/app.conf
 
 EXPOSE 8080
 

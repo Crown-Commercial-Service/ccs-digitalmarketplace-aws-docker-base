@@ -9,10 +9,6 @@ COPY nginx.conf /etc/nginx/nginx.conf
 RUN rm -f /etc/nginx/conf.d/*.conf
 COPY --chown=nginx:nginx sites-enabled.conf /etc/nginx/conf.d/sites-enabled.conf
 COPY --chown=nginx:nginx app-headless.conf /etc/nginx/sites-enabled/app.conf
+COPY configure-nginx.sh /docker-entrypoint.d/10-configure-nginx.sh
 
 EXPOSE 8080
-
-ONBUILD ARG DM_APP_NAME
-ONBUILD RUN sed -i "s/{DM_APP_NAME}/${DM_APP_NAME}/g" /etc/nginx/nginx.conf
-ONBUILD ARG DM_BACKEND=localhost:8888
-ONBUILD RUN sed -i "s/{DM_BACKEND}/${DM_BACKEND}/g" /etc/nginx/sites-enabled/app.conf

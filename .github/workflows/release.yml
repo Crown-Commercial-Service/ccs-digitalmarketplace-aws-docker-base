@@ -1,0 +1,42 @@
+# Create a release using the version number from the VERSION
+#
+# This workflow is designed to create a GitHub release whenever a pull request
+# is merged to the main branch that updates the version number.
+#
+# The release is created with the tag and name of the version number.
+#
+# If there already exists a tag for the package version number the release
+# should not be created.
+
+name: Create a GitHub release
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Get build version
+        id: build_version
+        run: echo "version=$(cat VERSION)" >> $GITHUB_OUTPUT
+      
+      - name: Check if version tag already exists
+        id: version_tag
+        uses: mukunku/tag-exists-action@bdad1eaa119ce71b150b952c97351c75025c06a9
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag: ${{ steps.build_version.outputs.version }}
+
+      - name: Create GitHub release
+        if: ${{ steps.version_tag.outputs.exists == 'false' }}
+        uses: ncipollo/release-action@v1
+        with:
+          token: ${{ secrets.DM_GITHUB_TOKEN }}
+          tag: ${{ steps.build_version.outputs.version }}
+          name: Release v${{ steps.build_version.outputs.version }}

@@ -2,6 +2,11 @@
 
 Records breaking changes from major version bumps
 
+## 2.0.0
+
+Update python to v3.10
+
+
 ## 1.0.0
 
 Initial version.

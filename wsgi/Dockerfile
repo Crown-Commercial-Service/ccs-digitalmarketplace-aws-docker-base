@@ -4,7 +4,7 @@ FROM python:3.10-alpine
 ENV APP_DIR=/app
 ENV DEP_PYUWSGI_VERSION=2.0.22
 # Add the venv bin directory to the path. Once the venv is created, it will be the preferred location for python3, pip3 and uwsgi
-ENV PATH="/app/venv/bin:$PATH"
+ENV PATH="/$APP_DIR/venv/bin:$PATH"
 
 ARG BUILD_DATE
 ARG BUILD_VERSION

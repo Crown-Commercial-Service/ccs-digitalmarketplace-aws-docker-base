@@ -1,5 +1,5 @@
 # Node pinned as per original project
-FROM node:20.9-alpine
+FROM node:iron-alpine
 ENV APP_DIR=/app
 WORKDIR ${APP_DIR}
 # Upgrade apk packages now

@@ -4,6 +4,8 @@ Records breaking changes from major version bumps
 
 ## Unreleased
 
+Update python to v3.12
+
 ## 3.0.0
 
 Update python to v3.11

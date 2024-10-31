@@ -4,6 +4,10 @@ Records breaking changes from major version bumps
 
 ## Unreleased
 
+## 5.0.0
+
+Update python to v3.13
+
 ## 4.1.0
 
 Increase client_max_body_size and keepalive_timeout

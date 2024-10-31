@@ -1,5 +1,5 @@
 # Python pinned as per original project
-FROM python:3.12-alpine
+FROM python:3.13-alpine
 
 ENV APP_DIR=/app
 ENV DEP_PYUWSGI_VERSION=2.0.29

@@ -5,6 +5,7 @@ Records breaking changes from major version bumps
 ## Unreleased
 
 Update python to v3.11
+Update NodeJS to LTS `jod` (`22.11`)
 
 ## 2.1.0
 

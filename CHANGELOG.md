@@ -10,6 +10,7 @@ Update python to v3.12
 
 Update python to v3.11
 Update NodeJS to LTS `jod` (`22.11`)
+Update python to v3.12
 
 ## 2.1.0
 

@@ -28,4 +28,17 @@ There is a recently-discovered bug (Oct 2023) in the libcrypto package (source [
 
 There is a discussion around this issue on [GitHub](https://github.com/wbond/oscrypto/issues/78) however, a new release does not seem to be forthcoming.
 
-As such, for now, we will use a base image with an older version of debian `python:3.9-slim-buster`, instead of `python:3.9-slim-bookworm` which we use for all the other apps.
+## Versioning
+
+Releases of this project follow [semantic versioning](http://semver.org/), ie
+> Given a version number MAJOR.MINOR.PATCH, increment the:
+>
+> - MAJOR version when you make incompatible API changes,
+> - MINOR version when you add functionality in a backwards-compatible manner, and
+> - PATCH version when you make backwards-compatible bug fixes.
+
+To make a new version:
+- update the version in the `VERSION` file
+- if you are making a major change, also update the change log;
+
+When the pull request is merged a GitHub Action will tag the new version.

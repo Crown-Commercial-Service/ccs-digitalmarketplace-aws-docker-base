@@ -4,6 +4,10 @@ Records breaking changes from major version bumps
 
 ## Unreleased
 
+## 4.1.0
+
+Increase client_max_body_size and keepalive_timeout
+
 ## 4.0.1
 
 Update pyuwsgi to v2.0.29

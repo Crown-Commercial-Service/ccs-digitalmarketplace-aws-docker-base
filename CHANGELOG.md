@@ -4,6 +4,10 @@ Records breaking changes from major version bumps
 
 ## Unreleased
 
+## 4.0.1
+
+Update pyuwsgi to v2.0.29
+
 ## 4.0.0
 
 Update python to v3.12

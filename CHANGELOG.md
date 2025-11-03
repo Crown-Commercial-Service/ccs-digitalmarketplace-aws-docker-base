@@ -4,6 +4,11 @@ Records breaking changes from major version bumps
 
 ## Unreleased
 
+## 6.0.0
+
+Update python to v3.14 (πthon)
+Update NodeJS to LTS `krypton` (`24.11`)
+
 ## 5.0.0
 
 Update python to v3.13

@@ -1,8 +1,8 @@
 # Python pinned as per original project
-FROM python:3.13-alpine
+FROM python:3.14-alpine
 
 ENV APP_DIR=/app
-ENV DEP_PYUWSGI_VERSION=2.0.29
+ENV DEP_UWSGI_VERSION=2.0.31
 # Add the venv bin directory to the path. Once the venv is created, it will be the preferred location for python3, pip3 and uwsgi
 ENV PATH="/$APP_DIR/venv/bin:$PATH"
 
@@ -12,9 +12,12 @@ LABEL BUILD_DATE=${BUILD_DATE}
 LABEL BUILD_VERSION=${BUILD_VERSION}
 
 WORKDIR ${APP_DIR}
+
 RUN addgroup -S uwsgi && adduser -S -H -G uwsgi uwsgi && \
     python3 -m venv /app/venv && \
-    pip3 install --no-cache-dir --upgrade pip setuptools pyuwsgi==${DEP_PYUWSGI_VERSION}
+    apk add --no-cache --virtual .build-deps gcc libc-dev linux-headers && \
+    pip3 install --no-cache-dir --upgrade pip setuptools uWSGI==${DEP_UWSGI_VERSION} && \
+    apk del .build-deps;
 
 COPY mime.types /etc/mime.types
 

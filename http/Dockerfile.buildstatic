@@ -1,5 +1,5 @@
 # Node pinned as per original project
-FROM node:jod-alpine
+FROM node:krypton-alpine
 ENV APP_DIR=/app
 WORKDIR ${APP_DIR}
 # Upgrade apk packages now

@@ -4,6 +4,10 @@ Records breaking changes from major version bumps
 
 ## Unreleased
 
+## 6.1.0
+
+Increase nginx header buffer sizes and uwsgi buffer size for larger payload handling
+
 ## 6.0.0
 
 Update python to v3.14 (πthon)

@@ -4,6 +4,10 @@ Records breaking changes from major version bumps
 
 ## Unreleased
 
+## 6.2.0
+
+Changed HTTP NGINX from ARCHIVED nginxinc/nginx-unprivileged:alpine to ACTIVE nginx/nginx-unprivileged:alpine
+
 ## 6.1.0
 
 Increase nginx header buffer sizes and uwsgi buffer size for larger payload handling
